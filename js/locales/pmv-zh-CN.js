@@ -455,7 +455,8 @@ export default {
     "Music from a video": "来自视频的音乐",
     // Web version: clips from folders on your disk
     "Runs locally – no uploads": "本地运行——不上传",
-    "Songs and clips are opened straight from your disk. Nothing is sent anywhere.": "歌曲和片段直接从你的磁盘打开，不会发送到任何地方。",
+    "Your media stays on your device. The optional Grok assistant sends only text and your API key.": "你的媒体保留在设备上。可选的 Grok 助手只会发送文本和你的 API 密钥。",
+    "Your media stays on your device and is never uploaded. If you choose the Grok assistant, your prompt and xAI API key are sent to the Worker URL you provide and forwarded to xAI. The author can't see, store or control what you make.": "你的媒体保留在设备上，绝不会上传。如果你选择 Grok 助手，你的提示和 xAI API 密钥会发送到你提供的 Worker 网址，并转发给 xAI。作者无法查看、存储或控制你制作的内容。",
     "Terms": "条款",
     "Source": "源代码",
     "Pick a song and a folder of clips – on every beat it cuts to the next one. Live, and optionally recorded as a video. Everything runs in your browser: your files are never uploaded.": "选择一首歌曲和一个片段文件夹——每个节拍都会切换到下一个片段。实时播放，也可以录制成视频。一切都在你的浏览器中运行：你的文件永远不会被上传。",

@@ -14,7 +14,7 @@ const TERMS = `
     <li><b>You never use footage of real people without their consent</b> – in particular, you don't create or share sexual content of anyone who hasn't agreed to it.</li>
     <li><b>You follow the law</b> where you live, including copyright and privacy law.</li>
   </ol>
-  <p class="kb-gate-note">Everything runs on your device: nothing is uploaded, and the author can't see, store or control what you make. <b>You alone are responsible for what you create and share with this tool.</b> The author doesn't condone any misuse and accepts no liability for it. The software is provided “as is”, without warranty of any kind (MIT license).</p>
+  <p class="kb-gate-note">Your media stays on your device and is never uploaded. If you choose the Grok assistant, your prompt and xAI API key are sent to the Worker URL you provide and forwarded to xAI. The author can't see, store or control what you make. <b>You alone are responsible for what you create and share with this tool.</b> The author doesn't condone any misuse and accepts no liability for it. The software is provided “as is”, without warranty of any kind (MIT license).</p>
 `;
 
 const accepted = () => {
