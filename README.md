@@ -8,7 +8,7 @@ This is the standalone web version of the PMV Generator from [stash-pmv-plugins]
 
 ## Privacy
 
-Everything happens in your browser. Songs and clips are opened straight from your disk and are **never uploaded** – the page is plain static HTML and JavaScript without any backend, tracking or analytics. Your settings are remembered in your browser's local storage. Only if you use **Plex** does the page talk to plex.tv (to sign in) and to your own Plex server – straight from your browser, nothing passes through anyone else; the Plex key stays in your browser, and **Sign out** removes it.
+Songs and clips are opened straight from your disk and are **never uploaded**. The site has no tracking or analytics. Your settings are remembered in your browser's local storage. If you use **Plex**, the page talks to plex.tv and your own Plex server; your Plex key stays in this browser, and **Sign out** removes it. If you use the optional **Grok style assistant**, your prompt, current style settings and xAI API key are sent to the Cloudflare Worker URL you enter; the Worker forwards the prompt and key to xAI. The API key is not saved by the page or Worker. xAI API usage may incur charges.
 
 ## Terms of use & disclaimer
 
@@ -34,6 +34,8 @@ Everything runs locally in your browser – the author never receives, sees, sto
 4. **Go**: runs as a fullscreen show (Space pause, F fullscreen, Esc stop; with several songs N / P or the buttons in the bar skip). The bar and the mouse pointer disappear after 2.5 s without movement; **H** hides the bar for good (H again brings it back). **I** shows which clips are on screen (file, size, playing / loading / black picture) and which had to be skipped and why – clips the browser can't decode are left out instead of showing a black field. 4K clips run smoothly: the picture analysis runs in the background and every clip frame reaches the screen, also on 144/240 Hz monitors. With **Record** you get a WebM video to download – the duration is written into the file right in the browser, so players show the length and can seek.
 
    **My settings** saves everything about clips, cutting, effects, look and sound under a name and loads it again (kept in this browser); **Export** / **Import** move it as a file – also between the web version and the Stash plugin.
+
+   **Grok style assistant** (optional): deploy the included Cloudflare Worker, enter its `workers.dev` URL and your xAI API key, then describe a style to generate and apply settings. To deploy, install Wrangler (`npm install --global wrangler`), run `wrangler login`, then from the repository root run `wrangler deploy --config cloudflare/wrangler.toml`. Use the Worker URL shown by Wrangler (for example `https://pmvgen-grok-proxy.<your-account>.workers.dev`). The Worker only accepts requests from this site and localhost:8000. Your prompt, current style settings and key pass through your Worker to xAI; the key is cleared from the input after each request and is not stored. Media files are not sent. Use your own Worker and xAI key; xAI may charge for API use.
 
    **Funscript** (optional): builds a script for The Handy from the song and plays it with the PMV – enter your connection key under Funscript (kept in this browser only).
 

@@ -4,6 +4,22 @@
 
 export default {
   texts: {
+    "Grok style assistant": "Grok 风格助手",
+    "Cloudflare Worker URL": "Cloudflare Worker 网址",
+    "xAI API key": "xAI API 密钥",
+    "Describe the PMV style you want …": "描述你想要的 PMV 风格……",
+    "Describe the PMV style you want": "描述你想要的 PMV 风格",
+    "Generate and apply style": "生成并应用风格",
+    "Your prompt, current style settings and xAI API key are sent to the Worker you choose, which forwards the prompt and key to xAI. The key is not saved. Media files are not sent.": "你的提示、当前风格设置和 xAI API 密钥会发送到你选择的 Worker，再由它转发给 xAI。密钥不会保存。媒体文件不会发送。",
+    "Asking Grok …": "正在询问 Grok……",
+    "Grok style applied.": "已应用 Grok 风格。",
+    "Enter your deployed Cloudflare Worker URL.": "请输入已部署的 Cloudflare Worker 网址。",
+    "Use your HTTPS Cloudflare Workers URL, ending in .workers.dev.": "请使用以 .workers.dev 结尾的 HTTPS Cloudflare Workers 网址。",
+    "Enter your xAI API key first.": "请先输入 xAI API 密钥。",
+    "Describe the style you want first.": "请先描述你想要的风格。",
+    "Keep the style description to 500 characters or fewer.": "风格描述请控制在 500 个字符以内。",
+    "Grok request timed out. Try again.": "Grok 请求超时，请重试。",
+    "Could not reach the Grok proxy. Check the Worker URL and deployment.": "无法连接 Grok 代理，请检查 Worker 网址和部署。",
     "Match window": "匹配窗口",
     "window shape": "窗口形状",
     "Resolution up to": "分辨率最高",
