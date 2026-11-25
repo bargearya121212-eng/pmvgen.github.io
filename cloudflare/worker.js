@@ -70,7 +70,7 @@ export default {
     const url = new URL(request.url);
     if (url.pathname !== "/api/grok") return json({ error: "Not found." }, 404, origin);
     if (!origin || !ALLOWED_ORIGINS.has(origin)) return json({ error: "Origin not allowed." }, 403, origin);
-    if (request.method === "OPTIONS") return json({}, 204, origin);
+    if (request.method === "OPTIONS") return json({}, 200, origin);
     if (request.method !== "POST") return json({ error: "Method not allowed." }, 405, origin);
     if (!request.headers.get("Content-Type")?.toLowerCase().startsWith("application/json")) {
       return json({ error: "Expected application/json." }, 415, origin);
@@ -97,7 +97,7 @@ export default {
     try {
       response = await fetch(API_URL, {
         method: "POST",
-        headers: { Authorization: `****** "Content-Type": "application/json" },
+        headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
         signal: AbortSignal.timeout(45000),
         body: JSON.stringify({
           model: MODEL,
