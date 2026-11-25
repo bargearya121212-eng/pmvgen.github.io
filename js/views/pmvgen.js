@@ -8,6 +8,7 @@ import { esc, icon, toast, errorToast, fmtDuration, fmtBytes, fmtNum, store, pro
 import * as lib from "../library.js";
 import { fixWebmDuration } from "../webmfix.js";
 import { buildFunscript, FS_DEFAULTS } from "../funscriptgen.js";
+import { requestGrokStyle } from "../grok.js";
 import { attachHandy, getHandy, interactiveConfig, saveInteractiveConfig } from "../interactive.js";
 import { analyzeFile, analyzeBuffer, sliceBuffer, songFromFrames, rescale, shift } from "../beats.js";
 import { scanPmv } from "../pmvscan.js";
@@ -616,9 +617,50 @@ export function render(main) {
             <input type="file" accept=".json,application/json" data-pfile hidden>
           </div>
         </div>
+        <div class="kb-pmvg-presets">
+          <span class="kb-lab-t">Grok style assistant</span>
+          <input class="kb-field" type="url" data-grok-worker placeholder="https://your-worker.your-account.workers.dev" autocomplete="url" spellcheck="false" aria-label="Cloudflare Worker URL">
+          <input class="kb-field" type="password" data-grok-key placeholder="xAI API key" autocomplete="off" spellcheck="false" aria-label="xAI API key">
+          <textarea class="kb-field" data-grok-prompt maxlength="500" placeholder="Describe the PMV style you want …" aria-label="Describe the PMV style you want"></textarea>
+          <button class="kb-btn" type="button" data-grok-run>Generate and apply style</button>
+          <p class="kb-hint">Your prompt, current style settings and xAI API key are sent to the Worker you choose, which forwards the prompt and key to xAI. The key is not saved. Media files are not sent.</p>
+          <p class="kb-hint" data-grok-status aria-live="polite"></p>
+        </div>
       </aside>
     </div>`;
   const $ = (s) => main.querySelector(s);
+
+  $("[data-grok-worker]").value = store.get("grokWorkerUrl", "");
+  $("[data-grok-worker]").addEventListener("change", (e) => {
+    store.set("grokWorkerUrl", e.target.value.trim());
+  });
+  $("[data-grok-run]").onclick = async (e) => {
+    const button = e.currentTarget;
+    const status = $("[data-grok-status]");
+    button.disabled = true;
+    status.textContent = "Asking Grok …";
+    const current = {
+      cut: S.cut, pace: S.pace, layouts: Object.keys(S.layouts).filter((key) => S.layouts[key]),
+      split: S.split, look: S.look, fit: S.fit, format: S.format,
+      lookAmt: S.lookAmt, bright: S.bright, pulseAmt: S.pulseAmt,
+      picFlash: S.picFlash, picFlashRate: S.picFlashRate, picFlashMode: S.picFlashMode,
+      picOverlay: S.picOverlay, picOverlayAmt: S.picOverlayAmt, soft: S.soft,
+      effects: Object.keys(FX).filter((key) => S.fx[key]),
+    };
+    try {
+      const patch = await requestGrokStyle($("[data-grok-worker]").value, $("[data-grok-key]").value, $("[data-grok-prompt]").value, current);
+      Object.assign(S, patch);
+      save();
+      paintSegs();
+      paintTip();
+      status.textContent = "Grok style applied.";
+    } catch (error) {
+      status.textContent = error.message || "Grok request failed.";
+    } finally {
+      $("[data-grok-key]").value = "";
+      button.disabled = false;
+    }
+  };
 
   // ---------- Show settings ----------
 
